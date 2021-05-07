@@ -31,11 +31,18 @@ const parseInput = (args) => {
         process.stderr.write(`Invalid input format.${usage}`)
         process.exit(1)
     }
-    console.log("!")
 }
 
 const validate = (args) => {
-    return parseInput(args)
+    parseInput(process.argv.slice(2))
+    return {
+        userInput: {
+            inbound: "./data/input.txt",
+            outbound: "./data/output.txt",
+            action: "encode",
+            shift: 7
+        }
+    }
 }
 
 export default validate

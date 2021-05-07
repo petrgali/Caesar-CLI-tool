@@ -1,41 +1,23 @@
-import fs from "fs"
-import { Transform, pipeline } from "stream"
-import rotate from "./src/rotate.js"
+import compute from "./src/computeShift.js"
+import validateInput from "./src/validateInput.js"
+import streamPipeline from "./src/createPipeline.js"
+import shiftConfig from "./src/shiftConfig.js"
 
+const { userInput } = validateInput()
 
+const readStream = streamPipeline.rStream(userInput.inbound)
+const writeStream = streamPipeline.wStream(userInput.outbound)
+const transform = streamPipeline.transformStream(
+    compute.asciiShift,
+    {
+        shift: userInput.shift % shiftConfig.cycle,
+        ...shiftConfig,
+    })
 
-
-/// validate
-/// construct properties
-const wStream = fs.createWriteStream("./data/output.txt", { flags: "a" })
-
-const file = true
-const tranformStream = new Transform({
-    transform: (chunk, encoding, callback) => {
-        callback(false, rotate(chunk.toString(), 7))
-    }
-})
-
-const runPipeline = (inbound, outbound) => {
-    pipeline(
-        inbound,
-        tranformStream,
-        outbound,
-        (err) => {
-            if (err) {
-                process.stderr.write(err.message)
-            }
-        }
-    )
-}
-
-if (!!file) {
-    const rStream = fs.createReadStream("./data/input.txt")
-    rStream.on("open", () => runPipeline(rStream, wStream))
-    rStream.on("error", () => runPipeline(process.stdin, wStream))
-} else {
-    runPipeline(process.stdin, wStream)
-}
+readStream
+    .on("open", () => streamPipeline.run(readStream, transform, writeStream))
+readStream
+    .on("error", () => streamPipeline.run(process.stdin, transform, writeStream))
 
 
 
