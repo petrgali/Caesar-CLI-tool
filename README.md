@@ -14,26 +14,27 @@ Main goal is mandatory use read, write and transform streams in NodeJS.
 
 
 ## Environment
-Project created using:
+
 * NodeJS v14.15.4
 
 
 ## Setup
 Before proceed You need to install [NodeJS](https://nodejs.org/en/download/) if You still haven't done it yet.
 
-To run this project:
 
 
-Clone this repository to your local folder:
+To run this project follow these steps.
+
+Clone this repository to your local folder
 ```
 $ git clone https://github.com/petrgali/Caesar-CLI-tool.git
 ```
 
-Switch to Caesar-CLI-tool branch:
+Switch to Caesar-CLI-tool branch
 ```
 $ git checkout Caesar-CLI-tool
 ```
-Project have some dependencies, so you need to install them additionally:
+Project have some dependencies, so you need to install them additionally
 ```
 $ npm i
 ```
@@ -57,7 +58,7 @@ List of available options:
 1. _-a (--action)_ is **encode**
 
 ```bash
-$ node my_caesar_cli -a encode -s 7 -i "./input.txt" -o "./output.txt"
+$ node caesar-tool -a encode -s 7 -i "./input.txt" -o "./output.txt"
 ```
 > input.txt
 > `This is secret. Message about "_" symbol!`
@@ -66,7 +67,7 @@ $ node my_caesar_cli -a encode -s 7 -i "./input.txt" -o "./output.txt"
 > `Aopz pz zljyla. Tlzzhnl hivba "_" zftivs!`
 
 ```bash
-$ node my_caesar_cli --action encode --shift 7 --input plain.txt --output encoded.txt
+$ node caesar-tool --action encode --shift 7 --input plain.txt --output encoded.txt
 ```
 > plain.txt
 > `This is secret. Message about "_" symbol!`
@@ -78,7 +79,7 @@ $ node my_caesar_cli --action encode --shift 7 --input plain.txt --output encode
 _Decoding encoded initial string with the same -s(--shift) number produces the initial string._
 
 ```bash
-$ node my_caesar_cli --action decode --shift 7 --input encoded.txt --output plain.txt
+$ node caesar-tool --action decode --shift 7 --input encoded.txt --output plain.txt
 ```
 
 > encoded.txt
@@ -90,7 +91,7 @@ $ node my_caesar_cli --action decode --shift 7 --input encoded.txt --output plai
 3. _(Optional) Negative shift handling_
 
 ```bash
-$ node my_caesar_cli --action encode --shift -1 --input plain.txt --output encoded.txt
+$ node caesar-tool --action encode --shift -1 --input plain.txt --output encoded.txt
 ```
 
 > plain.txt
