@@ -3,10 +3,12 @@ import { Transform, pipeline } from "stream"
 
 const streamPipeline = {
     rStream: (input) => {
-        return fs.createReadStream(input)
+        return !!input
+            ? fs.createReadStream(input)
+            : process.stdin
     },
     wStream: (output) => {
-        return output
+        return !!output
             ? fs.createWriteStream(output, { flags: "a" })
             : process.stdout
     },

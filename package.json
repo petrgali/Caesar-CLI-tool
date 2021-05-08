@@ -2,13 +2,10 @@
   "name": "caesar-cli",
   "version": "1.0.0",
   "description": "Caesar cipher CLI tool",
-  "main": "index.js",
+  "main": "caesar-tool.js",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "bin": {
-    "caesar-cli": "./index.js"
+    "caesar-cli": "./caesar-tool.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +18,6 @@
   },
   "homepage": "https://github.com/petrgali/Caesar-CLI-tool#readme",
   "dependencies": {
-    "minimist": "^1.2.5"
+    "commander": "^7.2.0"
   }
 }
